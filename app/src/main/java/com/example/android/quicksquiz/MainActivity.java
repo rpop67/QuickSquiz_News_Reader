@@ -2,10 +2,12 @@ package com.example.android.quicksquiz;
 
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.Loader;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -30,17 +32,33 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<A
         setContentView(R.layout.activity_main);
 
         loadingIndicator = findViewById(R.id.loading_indicator);
-        startProgress(view);
         emptyTextView = findViewById(R.id.empty_view);
-        listView = findViewById(R.id.list);
         RelView = findViewById(R.id.relView);
+        listView = findViewById(R.id.list);
+
         listView.setEmptyView(emptyTextView);
-        LoaderManager loaderManager = getLoaderManager();
+
+        ConnectivityManager connmanager=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=connmanager.getActiveNetworkInfo();
+        RelView.setVisibility(View.INVISIBLE);
+
 
         // Initialize the loader. Pass in the int ID constant defined above and pass in null for
         // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
         // because this activity implements the LoaderCallbacks interface).
-        loaderManager.initLoader(POST_LOADER_ID, null, this);
+        if(networkInfo!=null && networkInfo.isConnected())
+        {
+            RelView.setVisibility(View.VISIBLE);
+            startProgress(view);
+            LoaderManager loaderManager = getLoaderManager();
+            loaderManager.initLoader(POST_LOADER_ID, null, this);
+        }
+        else if(networkInfo==null)
+        {
+
+            RelView.setVisibility(View.GONE);
+            emptyTextView.setText("No Internet Connection");
+        }
 
     }
 
