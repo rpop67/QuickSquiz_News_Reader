@@ -79,8 +79,7 @@ public class Utils {
             }
         } catch (IOException e) {
             Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
-        }
-        finally {
+        } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
             }
@@ -107,64 +106,55 @@ public class Utils {
         return output.toString();
     }
 
-    private static ArrayList<Post> extractFeatureFromJson(String newsJSON){
+    private static ArrayList<Post> extractFeatureFromJson(String newsJSON) {
 
-        if(TextUtils.isEmpty(newsJSON))
-        {
+        if (TextUtils.isEmpty(newsJSON)) {
             return null;
         }
-        try
-        {
-            ArrayList<Post> JsonArray=new ArrayList<Post>();
-            JSONObject baseJSONOject= new JSONObject(newsJSON);
-            JSONObject responseJSONObject=new JSONObject(baseJSONOject.getString("response"));
-            JSONArray resultJSONArray= responseJSONObject.getJSONArray("results");
-            if(resultJSONArray.length()>0)
-            {
-                for(int i=0;i<resultJSONArray.length();i++)
-                {
-                    JSONObject details=resultJSONArray.getJSONObject(i);
-                    String section=details.getString("sectionName");
-                    Log.v(LOG_TAG,"Section is "+section);
-                    String dateAndTime=details.getString("webPublicationDate");
-                    Log.v(LOG_TAG,"Date & Time is "+dateAndTime);
+        try {
+            ArrayList<Post> JsonArray = new ArrayList<Post>();
+            JSONObject baseJSONOject = new JSONObject(newsJSON);
+            JSONObject responseJSONObject = new JSONObject(baseJSONOject.getString("response"));
+            JSONArray resultJSONArray = responseJSONObject.getJSONArray("results");
+            if (resultJSONArray.length() > 0) {
+                for (int i = 0; i < resultJSONArray.length(); i++) {
+                    JSONObject details = resultJSONArray.getJSONObject(i);
+                    String section = details.getString("sectionName");
+                    Log.v(LOG_TAG, "Section is " + section);
+                    String dateAndTime = details.getString("webPublicationDate");
+                    Log.v(LOG_TAG, "Date & Time is " + dateAndTime);
                     String[] arrSplit = dateAndTime.split("T");
-                    String date=arrSplit[0];
-                    Log.v(LOG_TAG,"date is "+date);
-                    String timeParsed=arrSplit[1];
-                    String time=timeParsed.substring(0,5);
-                    Log.v(LOG_TAG,"Time is "+time);
+                    String date = arrSplit[0];
+                    Log.v(LOG_TAG, "date is " + date);
+                    String timeParsed = arrSplit[1];
+                    String time = timeParsed.substring(0, 5);
+                    Log.v(LOG_TAG, "Time is " + time);
 
-                    String postTitle=details.getString("webTitle");
-                    Log.v(LOG_TAG,"postTitle is "+postTitle);
-                    String url=details.getString("webUrl");
-                    Log.v(LOG_TAG,"URL is "+url);
-                    JSONArray tagsJSONArray=details.getJSONArray("tags");
+                    String postTitle = details.getString("webTitle");
+                    Log.v(LOG_TAG, "postTitle is " + postTitle);
+                    String url = details.getString("webUrl");
+                    Log.v(LOG_TAG, "URL is " + url);
+                    JSONArray tagsJSONArray = details.getJSONArray("tags");
 
-                    String author="";
-                    if(tagsJSONArray.length()>0)
-                    {
+                    String author = "";
+                    if (tagsJSONArray.length() > 0) {
                         JSONObject tagDetails = (JSONObject) tagsJSONArray.get(0);
-                      String first=tagDetails.getString("firstName");
-                      String last=tagDetails.getString("lastName");
-                      author=first+" "+last;
+                        String first = tagDetails.getString("firstName");
+                        String last = tagDetails.getString("lastName");
+                        author = first + " " + last;
 
                     }
-                    Log.v(LOG_TAG,"Author is "+author);
-                    JsonArray.add (new Post(postTitle,date,time,author,url,section));
-
-
-               }
-               return JsonArray;
+                    Log.v(LOG_TAG, "Author is " + author);
+                    JsonArray.add(new Post(postTitle, date, time, author, url, section));
+                }
+                return JsonArray;
             }
 
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             Log.e(LOG_TAG, "Problem parsing the  JSON results", e);
         }
         return null;
 
 
-
-        }
+    }
 }

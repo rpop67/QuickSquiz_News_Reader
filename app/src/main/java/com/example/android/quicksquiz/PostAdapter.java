@@ -42,8 +42,6 @@ public class PostAdapter extends ArrayAdapter<Post> {
         //"<a href='http://www.google.com'> Google </a>";
         String webURL=currentPost.getWeblink();
         String URLtext="<a href="+webURL+">See full Story>></a>";
-
-
         sectionText.setText("#"+currentPost.getCategory());
         timeText.setText(currentPost.getPostTime());
         dateText.setText(currentPost.getDate());
@@ -51,8 +49,6 @@ public class PostAdapter extends ArrayAdapter<Post> {
         authorText.setText(currentPost.getAuthor());
         urlText.setText(Html.fromHtml(URLtext));
         urlText.setMovementMethod(LinkMovementMethod.getInstance());
-
-
         return listItemView;
 
     }

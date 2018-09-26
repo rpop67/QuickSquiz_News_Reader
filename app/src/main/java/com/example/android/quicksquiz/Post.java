@@ -14,40 +14,36 @@ public class Post {
     public final String category;
 
 
-
-    public Post(String titlePassed,String datePassed,String timePassed,String authorPassed,String weblinkPassed,String categoryPassed)
-    {
-        author=authorPassed;
-        title=titlePassed;
-        date=datePassed;
-        time=timePassed;
-        weblink=weblinkPassed;
-        category=categoryPassed;
+    public Post(String titlePassed, String datePassed, String timePassed, String authorPassed, String weblinkPassed, String categoryPassed) {
+        author = authorPassed;
+        title = titlePassed;
+        date = datePassed;
+        time = timePassed;
+        weblink = weblinkPassed;
+        category = categoryPassed;
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
-    public String getAuthor()
-    {
+    public String getAuthor() {
         return author;
     }
-    public String getDate()
-    {
+
+    public String getDate() {
         return date;
     }
-    public String getPostTime()
-    {
+
+    public String getPostTime() {
         return time;
     }
-    public String getWeblink()
-    {
+
+    public String getWeblink() {
         return weblink;
     }
-    public String getCategory()
-    {
+
+    public String getCategory() {
         return category;
     }
 

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:backgroundTint="@android:color/holo_purple"
+        android:backgroundTint="@color/bgcolor"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp">
 
@@ -23,22 +23,21 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/authorIcon"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/author"
-                    android:id="@+id/authorIcon"/>
+                    android:src="@drawable/author" />
 
                 <TextView
                     android:id="@+id/authorTV"
-                    android:inputType="textCapWords"
-                    android:layout_toRightOf="@id/authorIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="3dp"
+                    android:layout_toRightOf="@id/authorIcon"
+                    android:inputType="textCapWords"
                     android:textSize="16sp"
                     tools:text="author name" />
-
 
 
                 <TextView
@@ -46,9 +45,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:textColorLink="@android:color/black"
                     android:layout_marginVertical="3dp"
                     android:text="See full post"
+                    android:textColorLink="@android:color/black"
                     android:textSize="16sp" />
 
             </RelativeLayout>
@@ -85,19 +84,19 @@
                 <TextView
                     android:id="@+id/sectionTV"
                     android:layout_width="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/dateTV"
                     android:textSize="12sp"
                     tools:text="#sport" />
 
                 <ImageView
-                    android:layout_toLeftOf="@id/timeTV"
                     android:layout_width="15dp"
-                    android:paddingTop="2dp"
-                    android:layout_marginRight="3dp"
                     android:layout_height="15dp"
-                    android:src="@drawable/time"/>
+                    android:layout_marginRight="3dp"
+                    android:layout_toLeftOf="@id/timeTV"
+                    android:paddingTop="2dp"
+                    android:src="@drawable/time" />
 
                 <TextView
                     android:id="@+id/timeTV"
