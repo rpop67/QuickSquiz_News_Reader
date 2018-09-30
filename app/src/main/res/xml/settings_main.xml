@@ -1,0 +1,14 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="Quick Squiz Settings" >
+
+   <PreferenceCategory
+       android:title="Story settings">
+
+       <ListPreference
+           android:key="key_topic"
+           android:title="Topc Category"
+           />
+
+   </PreferenceCategory>
+</PreferenceScreen>
