@@ -5,10 +5,14 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +21,10 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements LoaderCallbacks<ArrayList<Post>> {
     private static final int POST_LOADER_ID = 1;
@@ -27,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<A
     ProgressBar loadingIndicator;
     View view;
 
-    private static final String REQUEST_URL = "https://content.guardianapis.com/search?api-key=56cc9867-3495-4cba-a70e-22c05c892e64&show-tags=contributor";
+    private static final String REQUEST_URL = "https://content.guardianapis.com/search";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,8 +120,37 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<A
 
     @Override
     public Loader<ArrayList<Post>> onCreateLoader(int id, Bundle args) {
-        PostLoader postSync = new PostLoader(this, REQUEST_URL);
-        return postSync;
+        String arr[]={"football","sport","country","politics"};
+        Set<String> newsChoiceDef=new HashSet<>(Arrays.asList(arr));
+
+        SharedPreferences sharedPrefs= PreferenceManager.getDefaultSharedPreferences(this);
+        Set<String> newsChoice = sharedPrefs.getStringSet("key_topic",newsChoiceDef);
+        //String newsChoice=sharedPrefs.getString("key_topic","technology");
+        String newsCount=sharedPrefs.getString("key_posts","30");
+
+        Uri mainUri = Uri.parse(REQUEST_URL);
+        Uri.Builder uriBuild = mainUri.buildUpon();
+        uriBuild.appendQueryParameter("api-key","56cc9867-3495-4cba-a70e-22c05c892e64");
+        //to traverse the whole set one at a time
+        Iterator<String> itr = newsChoice.iterator();
+        while(itr.hasNext())
+        {
+            String sec=itr.next();
+            uriBuild.appendQueryParameter("section",sec);
+            Log.v("LOGTAG","Section is : "+sec);
+        }
+
+        //uriBuild.appendPath(newsChoice);
+        uriBuild.appendQueryParameter("format", "json");
+        uriBuild.appendQueryParameter("page-size", newsCount);
+        uriBuild.appendQueryParameter("show-tags", "contributor");
+        //uriBuild.appendQueryParameter("show-fields","all");
+        return new PostLoader(this, uriBuild.toString());
+
+
+        //resolved preferences
+        //return new PostLoader(this,REQUEST_URL);
+
     }
 
     @Override
@@ -134,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<A
 
     @Override
     public void onLoaderReset(Loader<ArrayList<Post>> loader) {
-        //newsAdapter.clear();
+        newsAdapter.clear();
     }
 
 

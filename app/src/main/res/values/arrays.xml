@@ -1,2 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string-array name="topics">
+        <item>Sports</item>
+        <item>Politics</item>
+        <item>Books</item>
+        <item>Business</item>
+        <item>Music</item>
+        <item>Football special</item>
+
+
+    </string-array>
+
+    <string-array name="topicsValues">
+        <item>sport</item>
+        <item>politics</item>
+        <item>books</item>
+        <item>business</item>
+        <item>music</item>
+        <item>football</item>
+    </string-array>
+
+</resources>

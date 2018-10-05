@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="Quick Squiz Settings" >
@@ -5,10 +6,27 @@
    <PreferenceCategory
        android:title="Story settings">
 
-       <ListPreference
+       <MultiSelectListPreference
+           android:defaultValue="sport"
            android:key="key_topic"
-           android:title="Topc Category"
+           android:title="Topic Category"
+           android:summary="Press to show topics"
+           android:entries="@array/topics"
+           android:entryValues="@array/topicsValues"
            />
+       <SwitchPreference
+           android:title="Restricted to post limit"
+           android:editable="true"
+           android:key="enable_date"
+          />
+       <EditTextPreference
+           android:key="key_posts"
+           android:dependency="enable_date"
+           android:dialogTitle="How many posts do you want to limit to"
+           android:title="Set limit to posts"
+           android:inputType="numberDecimal"
+           />
+
 
    </PreferenceCategory>
 </PreferenceScreen>
