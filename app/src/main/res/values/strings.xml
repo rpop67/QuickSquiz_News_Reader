@@ -4,6 +4,13 @@
     <string name="settings_min_magnitude_key" translatable="false">min_magnitude</string>
     <string name="settings_min_magnitude_default" translatable="false">0</string>
 
+    <string name="sport_default">sport</string>
+    <string name="football_default">football</string>
+    <string name="music_default">music</string>
+    <string name="country_default">country</string>
+    <string name="politics_default">politics</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

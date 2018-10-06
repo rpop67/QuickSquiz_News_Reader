@@ -139,8 +139,10 @@ public class Utils {
                     String author = "";
                     if (tagsJSONArray.length() > 0) {
                         JSONObject tagDetails = (JSONObject) tagsJSONArray.get(0);
-                        String first = tagDetails.getString("firstName");
-                        String last = tagDetails.getString("lastName");
+                        String first = "";
+                        first=tagDetails.getString("firstName");
+                        String last=" ";
+                        last = tagDetails.getString("lastName");
                         author = first + " " + last;
 
                     }

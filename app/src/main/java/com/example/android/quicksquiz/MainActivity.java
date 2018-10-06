@@ -120,25 +120,41 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<A
 
     @Override
     public Loader<ArrayList<Post>> onCreateLoader(int id, Bundle args) {
-        String arr[]={"football","sport","country","politics"};
+        String arr[]={getString(R.string.football_default),getString(R.string.sport_default),getString(R.string.country_default),getString(R.string.politics_default),getString(R.string.music_default)};
         Set<String> newsChoiceDef=new HashSet<>(Arrays.asList(arr));
 
         SharedPreferences sharedPrefs= PreferenceManager.getDefaultSharedPreferences(this);
         Set<String> newsChoice = sharedPrefs.getStringSet("key_topic",newsChoiceDef);
-        //String newsChoice=sharedPrefs.getString("key_topic","technology");
+        StringBuilder sections=new StringBuilder();
+        boolean first=true;
+        for(String section:newsChoice)
+        {
+            if(first)
+                first=false;
+            else
+                sections.append(",");
+            sections.append(section);
+        }
+
+
         String newsCount=sharedPrefs.getString("key_posts","30");
 
         Uri mainUri = Uri.parse(REQUEST_URL);
         Uri.Builder uriBuild = mainUri.buildUpon();
         uriBuild.appendQueryParameter("api-key","56cc9867-3495-4cba-a70e-22c05c892e64");
+
+        if(!sections.toString().isEmpty()){
+            uriBuild.appendQueryParameter("q",sections.toString());
+        }
+
         //to traverse the whole set one at a time
-        Iterator<String> itr = newsChoice.iterator();
+       /* Iterator<String> itr = newsChoice.iterator();
         while(itr.hasNext())
         {
             String sec=itr.next();
             uriBuild.appendQueryParameter("section",sec);
             Log.v("LOGTAG","Section is : "+sec);
-        }
+        }*/
 
         //uriBuild.appendPath(newsChoice);
         uriBuild.appendQueryParameter("format", "json");
