@@ -111,6 +111,8 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<A
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                if(i==10)
+                    i=0;
                 loadingIndicator.setProgress(value);
 
             }
@@ -180,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<A
         // data set. This will trigger the ListView to update.
         if (news != null && !news.isEmpty()) {
             //newsAdapter.addAll(news);
-            listView.setAdapter((ListAdapter) newsAdapter);
+            listView.setAdapter( newsAdapter);
 
         }
         else if(news==null )
@@ -195,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<A
 
     @Override
     public void onLoaderReset(Loader<ArrayList<Post>> loader) {
-       // newsAdapter.clear();
+       newsAdapter.clear();
     }
 
 

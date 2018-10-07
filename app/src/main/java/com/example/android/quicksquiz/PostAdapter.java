@@ -56,15 +56,15 @@ public class PostAdapter extends ArrayAdapter<Post> {
         titleText.setText(currentPost.getTitle());
         authorText.setText(currentPost.getAuthor());
         String thumbString=currentPost.getThumbnail();
-        URI uri= null;
+        /*URI uri= null;
 
         try {
             uri = new URI(thumbString);
         } catch (URISyntaxException e) {
             e.printStackTrace();
-        }
+        }*/
 
-       Glide.with(this.getContext()).load(uri).into(putImage);
+       Glide.with(this.getContext()).load(thumbString).into(putImage);
 
 
 

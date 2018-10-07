@@ -7,7 +7,7 @@
        android:title="Story settings">
 
        <MultiSelectListPreference
-           android:defaultValue="all"
+           android:defaultValue="@string/football_default"
            android:key="key_topic"
            android:title="Topic Category"
            android:summary="Press to show topics"
