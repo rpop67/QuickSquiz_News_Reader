@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -23,7 +24,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements LoaderCallbacks<ArrayList<Post>> {
@@ -158,9 +158,10 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<A
 
         //uriBuild.appendPath(newsChoice);
         uriBuild.appendQueryParameter("format", "json");
+        uriBuild.appendQueryParameter("show-fields","thumbnail");
         uriBuild.appendQueryParameter("page-size", newsCount);
         uriBuild.appendQueryParameter("show-tags", "contributor");
-        //uriBuild.appendQueryParameter("show-fields","all");
+
         return new PostLoader(this, uriBuild.toString());
 
 
@@ -178,16 +179,23 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<A
         // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (news != null && !news.isEmpty()) {
-            newsAdapter.addAll(news);
+            //newsAdapter.addAll(news);
+            listView.setAdapter((ListAdapter) newsAdapter);
+
+        }
+        else if(news==null )
+        {
+            Log.i("TAG", "onLoadFinished: List is empty");
         }
 
+
         // Get a reference to the ListView, and attach the adapter to the listView.
-        listView.setAdapter(newsAdapter);
+
     }
 
     @Override
     public void onLoaderReset(Loader<ArrayList<Post>> loader) {
-        newsAdapter.clear();
+       // newsAdapter.clear();
     }
 
 

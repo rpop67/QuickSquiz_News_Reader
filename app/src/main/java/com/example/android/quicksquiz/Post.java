@@ -12,15 +12,17 @@ public class Post {
     public final String author;
     public final String weblink;
     public final String category;
+    public final String thumbnail;
 
 
-    public Post(String titlePassed, String datePassed, String timePassed, String authorPassed, String weblinkPassed, String categoryPassed) {
+    public Post(String titlePassed, String datePassed, String timePassed, String authorPassed, String weblinkPassed, String categoryPassed,String thumbnailPassed) {
         author = authorPassed;
         title = titlePassed;
         date = datePassed;
         time = timePassed;
         weblink = weblinkPassed;
         category = categoryPassed;
+        thumbnail=thumbnailPassed;
     }
 
     public String getTitle() {
@@ -46,5 +48,7 @@ public class Post {
     public String getCategory() {
         return category;
     }
+
+    public String getThumbnail(){return thumbnail;}
 
 }
