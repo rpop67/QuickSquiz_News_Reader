@@ -22,6 +22,7 @@
        <EditTextPreference
            android:key="key_posts"
            android:dependency="enable_date"
+           android:summary="Enter no. of posts to be displayed"
            android:dialogTitle="How many posts do you want to limit to"
            android:title="Set limit to posts"
            android:inputType="numberDecimal"
