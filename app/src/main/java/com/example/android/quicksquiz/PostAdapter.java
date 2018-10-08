@@ -47,7 +47,7 @@ public class PostAdapter extends ArrayAdapter<Post> {
         TextView authorText=listItemView.findViewById(R.id.authorTV);
         TextView urlText=listItemView.findViewById(R.id.urlTV);
         ImageView putImage=listItemView.findViewById(R.id.putThumbnail);
-        //"<a href='http://www.google.com'> Google </a>";
+
         String webURL=currentPost.getWeblink();
         String URLtext="<a href="+webURL+">See full Story>></a>";
         sectionText.setText("#"+currentPost.getCategory());
@@ -56,19 +56,7 @@ public class PostAdapter extends ArrayAdapter<Post> {
         titleText.setText(currentPost.getTitle());
         authorText.setText(currentPost.getAuthor());
         String thumbString=currentPost.getThumbnail();
-        /*URI uri= null;
-
-        try {
-            uri = new URI(thumbString);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }*/
-
-       Glide.with(this.getContext()).load(thumbString).into(putImage);
-
-
-
-
+        Glide.with(this.getContext()).load(thumbString).into(putImage);
         urlText.setText(Html.fromHtml(URLtext));
         urlText.setMovementMethod(LinkMovementMethod.getInstance());
         return listItemView;

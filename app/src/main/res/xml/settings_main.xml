@@ -8,9 +8,9 @@
 
        <MultiSelectListPreference
            android:defaultValue="@string/football_default"
-           android:key="key_topic"
-           android:title="Topic Category"
-           android:summary="Press to show topics"
+           android:key="@string/keyTopic"
+           android:title="@string/topicTitle"
+           android:summary="@string/topicSummary"
            android:entries="@array/topics"
            android:entryValues="@array/topicsValues"
            />
@@ -20,11 +20,12 @@
            android:key="enable_date"
           />
        <EditTextPreference
-           android:key="key_posts"
+           android:key="@string/keyPosts"
            android:dependency="enable_date"
-           android:summary="Enter no. of posts to be displayed"
+           android:summary="@string/postSummary"
            android:dialogTitle="How many posts do you want to limit to"
-           android:title="Set limit to posts"
+           android:title="@string/postTitle"
+           android:selectAllOnFocus="true"
            android:inputType="numberDecimal"
            />
 
